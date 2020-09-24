@@ -1,0 +1,63 @@
+Change user : Anone -> Debi
+	sudo -i -u postgres
+
+login superuser
+	psql -U postgres
+				-d database_name
+
+Create db an21
+	CREATE DATABASE an21;
+
+Create User
+	CREATE USER joe WITH ENCRYPTED PASSWORD 'admin';
+
+Give all privilleges for thise User
+	GRANT ALL PRIVILEGES ON DATABASE an21 TO joe;
+
+logout postgres user
+	\q
+
+Login with new user
+	psql -U joe
+
+create table artiste 
+	CREATE TABLE artiste (id integer PRIMARY kEY, nom text);
+
+create table chanson
+	CREATE TABLE chanson (id integer PRIMARY KEY, titre text, artiste_id integer, foreign key (artiste_id) references artiste(id));
+
+Insert values with artiste
+	INSERT INTO artiste VALUES (1,'manou');
+
+Insert values with artiste
+	INSERT INTO artiste VALUES (2,'Bambo');
+
+Insert values with chanson
+	INSERT INTO chanson VALUES (1, 'je vole', 1);
+
+Insert values with chanson
+	INSERT INTO chanson VALUES (2, 'Chanter', 1);
+
+Insert values with chanson	
+	INSERT INTO chanson VALUES (3, 'je vole', 2);
+
+Show all chanson
+	select * from chanson;
+
+create artiste
+	insert into artiste values (3, 'Rico');
+
+Insert chanson for artiste 3
+	insert into chanson values (4, 'Boum', 3), (5, 'allez y', 3), (6, 'Retour', 3);
+
+Show chanson artiste 3
+	select titre from chanson Where artiste_id = 3;
+
+Show all chanson wit o on title	
+	select * from chanson where titre LIKE '%o%';
+
+Show all id chanson for artiste 2 in a table "Identifiant de chanson"
+	select id AS "Identifiant de chanson" from chanson where artiste_id = 2;
+
+Show all id chanson for artiste 2 and artiste 3 in a table "Identifiant de chanson"
+	select id AS "Identifiant de chanson" from chanson where artiste_id = 2 or artiste_id = 3;
